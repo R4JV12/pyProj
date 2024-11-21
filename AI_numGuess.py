@@ -1,5 +1,4 @@
-from random import randint
-import time, os
+from random import randint; import time, os
 
 def clear(): os.system('cls' if os.name == 'nt' else 'clear')
 
