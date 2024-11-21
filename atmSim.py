@@ -6,7 +6,7 @@ def clear(): os.system('cls' if os.name == 'nt' else 'clear')
 def open_account(customers_info):
     name = input("Your Name? ")
     while True:
-        if len(pin := input("A Four-Digit Pincode: ") == 4 and pin.isdigit(): pin = int(pin); break
+        if len(pin := input("A Four-Digit Pincode: ")) == 4 and pin.isdigit(): pin = int(pin); break
         else: print("Only Four Digits Allowed!")
     while True:
         identity = random.randint(1000, 9999)
@@ -22,7 +22,7 @@ def check_id(identity):
     for customer in customers_info:
         if identity == customer['id']: 
             if (pin := int(input(f"Enter your pincode for '{customer['name']}': "))) == customer["pin"]: return customer
-            else: print("Incorrect PIN."); return
+            else: print("Incorrect PIN."); continue
     print("ID Not Found."); return
 
 def exchange(customer, amount, deposit):
