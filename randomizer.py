@@ -3,32 +3,32 @@ import os, time, random, sys
 def clear(): os.system("cls" if os.name == "nt" else "clear")
 
 
-def randomize(choices, interval=0, remaining=1, cls=False):
-    if not choices:
+def randomize(cmd, jar, interval=0, remaining=1, cls=False):
+    if not jar:
         print("No choices to pick from!")
         return
 
-    to_remove = len(choices) - remaining
+    to_remove = len(jar) - remaining
     clear()
 
     if to_remove > 0:
         for _ in range(to_remove):
-            unfaithful = random.choice(choices)
-            choices.remove(unfaithful)
-            print(f"Removing: {unfaithful}")
+            unfaithful = random.choice(jar)
+            jar.remove(unfaithful)
+            print(f"Removing: {unfaithful}") if len(cmd.split()) >= 2 else print("", end="")
             time.sleep(interval)
 
     if cls: clear()
 
-    print("\nFinal choice(s):", ", ".join(choices))
+    print("\nFinal choice(s):", ", ".join(jar)) if len(cmd.split()) >= 2 else print(f"Final Choice: {jar[0]}")
 
 
 def main():
     clear()
-    choices = []
+    jar = []
 
     while True:
-        cmd = input(f"Choice {len(choices) + 1}: ").strip()
+        cmd = input(f"Choice {len(jar) + 1}: ").strip()
         if cmd.lower().startswith("done"):
             try:
                 parts = cmd.split()
@@ -37,10 +37,10 @@ def main():
             except ValueError:
                 print("Invalid input! type 'help' for assistance.")
                 continue
-            randomize(choices, interval, max(1, remaining))
+            randomize(cmd, jar, interval, max(1, remaining))
             break
         elif cmd.lower() in ["coin", "toss"]:
-            print(random.choice(["Heads", "Tails"]))
+            print(random.choice([True, False]))
         elif cmd.lower() == "number":
             print(random.randint(1, 100))
         elif cmd.lower() in ["cls", "clean", "clear"]:
@@ -48,7 +48,7 @@ def main():
         elif cmd.lower() == "exit":
             sys.exit(0)
         else:
-            choices.append(cmd)
+            jar.append(cmd)
 
     input("Enter to restart...")
 
