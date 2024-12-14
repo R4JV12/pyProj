@@ -1,1 +1,1 @@
-print(f"{eval(input("Enter an expression: "))}")
+while True: exit() if (cmd := input("~$ ")).lower() == "exit" else print(f"{eval(cmd)}")
